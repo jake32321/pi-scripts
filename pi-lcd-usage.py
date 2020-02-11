@@ -21,4 +21,8 @@ lcd.clear()
 lcd.color = [75, 0, 130]
 
 while True:
-    lcd.message = "({})\nC: {} M: {} T: {}".format(gethostname(), psutil.cpu_percent(), psutil.virtual_memory()[2], CPUTemperature())
+    cpu_temp = ceil(CPUTemperature().temperature)
+    cpu_usage = ceil(psutil.cpu_percent())
+    mem_usage = ceil(psutil.virtual_memory()[2])
+    
+    lcd.message = "({})\nC:{} M:{} T:{}".format(gethostname(), cpu_usage, mem_usage, cpu_usage)
