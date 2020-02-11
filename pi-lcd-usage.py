@@ -24,7 +24,7 @@ while True:
     cpu_usage = ceil(psutil.cpu_percent())
     mem_usage = ceil(psutil.virtual_memory()[2])
 
-    lcd.message = "({})\nC:{} M:{} T:{}".format(gethostname(), cpu_usage, mem_usage, cpu_usage)
+    lcd.message = "({})\nC:{} M:{} T:{}°".format(gethostname(), cpu_usage, mem_usage, cpu_temp)
 
     if cpu_usage > 75 or mem_usage > 75:
         lcd.color = [255, 0, 0]
