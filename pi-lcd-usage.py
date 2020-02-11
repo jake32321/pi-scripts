@@ -19,14 +19,19 @@ lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
 
 lcd.clear()
 
-lcd.color = [75, 0, 130]
-
 while True:
-    cpu_temp = "{}°".format(ceil(CPUTemperature().temperature))
+    cpu_temp = ceil(CPUTemperature().temperature)
     cpu_usage = ceil(psutil.cpu_percent())
     mem_usage = ceil(psutil.virtual_memory()[2])
 
     lcd.message = "({})\nC:{} M:{} T:{}".format(gethostname(), cpu_usage, mem_usage, cpu_usage)
+
+    if cpu_usage > 75 or mem_usage > 75:
+        lcd.color = [255, 0, 0]
+    elif cpu_usage > 50 or mem_usage > 50:
+        lcd.color = [255, 255, 0]
+    else:
+        lcd.color = [0, 255, 0]
 
     # Only refresh every 5 seconds and then redraw
     time.sleep(5)
