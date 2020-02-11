@@ -22,4 +22,4 @@ while True:
     cpu_usage = psutil.cpu_percent()
     mem_usage = psutil.virtual_memory()[2]
 
-    lcd.message = "CPU: " + str(cpu_usage) + "%\nMem: " + str(mem_usage) + "%"
+    lcd.message = "CPU: " + str(int(cpu_usage)) + "%\nMem: " + str(int(mem_usage)) + "%"
