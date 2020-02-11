@@ -1,4 +1,5 @@
 import board
+import time
 import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
 import psutil
 from gpiozero import CPUTemperature
@@ -21,8 +22,14 @@ lcd.clear()
 lcd.color = [75, 0, 130]
 
 while True:
-    cpu_temp = ceil(CPUTemperature().temperature)
+    cpu_temp = "{}°".format(ceil(CPUTemperature().temperature))
     cpu_usage = ceil(psutil.cpu_percent())
     mem_usage = ceil(psutil.virtual_memory()[2])
-    
+
     lcd.message = "({})\nC:{} M:{} T:{}".format(gethostname(), cpu_usage, mem_usage, cpu_usage)
+
+    # Only refresh every 5 seconds and then redraw
+    time.sleep(5)
+
+    # Clear LCD since previously used char locations are not removed
+    lcd.clear()
